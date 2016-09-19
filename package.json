@@ -1,0 +1,14 @@
+{
+  "name": "cms",
+  "version": "1.0.0",
+  "private": true,
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.13.3",
+    "body-parser": "~1.14.2",
+    "mongoose": "~4.3.4",
+    "path": "~0.12.7",
+    "express-session": "~1.12.1",
+    "connect-multiparty": "~2.0.0"
+  }
+}
