@@ -1,6 +1,13 @@
 <div><span>Title</span><input type="text" ng-model="card.title"></div>
 <div><span>Sub Title</span><input type="text" ng-model="card.subtitle"></div>
-<div><span>Copy</span><textarea type="text" ng-model="card.copy"></textarea></div>
+<div><span>Copy</span><textarea ng-model="card.copy"></textarea></div>
 <div><span>Layout</span><input type="text" ng-model="card.layout"></div>
+
+<span>Links</span>
+<ul>
+    <li ng-repeat="link in card.links">
+        <a ng-href="#/link/:{{link._id}}">{{link.title}}</a>
+    </li>
+</ul>
 
 <input type="button" ng-click="CreateCard()" value="{{buttonText}}"/>

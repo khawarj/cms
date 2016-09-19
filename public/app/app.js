@@ -15,6 +15,10 @@
                 templateUrl: "/public/templates/partials/cardList.html",
                 controller: "cardListCtrl"
             })
+            .when("/link/:id", {
+                templateUrl: "/public/templates/partials/linkEditor.html",
+                controller: "linkCtrl"
+            })
             .otherwise('/home')
     }])
 
