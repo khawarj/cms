@@ -119,8 +119,22 @@
         }
     }
 
-    card.remove = function (id) {
+    card.removeLink = function (cardId, linkId, cb) {
+        if (linkId) {
+            Card.findById(cardId, function (err, card) {
+                if (err) {
+                    cb(err, card);
+                } else {
+                    card.links.id(linkId).remove();
+                    card.save(function (err, card) {
+                        cb(err, card);
+                    })
+                }
 
+            })
+        } else {
+            cb("Need Link Id to get Link", undefined)
+        }
     }
 
 

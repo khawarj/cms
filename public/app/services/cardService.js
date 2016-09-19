@@ -31,5 +31,9 @@
 
         }
 
+        this.removeLink = function (cardId, linkId) {
+            return $http.get("/api/removelink/" + cardId + "/" + linkId);
+        }
+
     }])
 }())

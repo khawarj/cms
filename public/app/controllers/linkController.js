@@ -20,6 +20,9 @@
                     $scope.card = res.data;
                 })
             }
+
+
+
         } else {
             $location.path("/home");
         }

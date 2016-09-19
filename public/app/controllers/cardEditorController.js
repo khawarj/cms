@@ -21,5 +21,12 @@
                 $scope.card = res.data;
             })
         }
+
+
+        $scope.RemoveLink = function (linkId) {
+            cardService.removeLink($scope.card._id, linkId).then(function (res) {
+                $scope.card = res.data;
+            })
+        }
     }])
 }())

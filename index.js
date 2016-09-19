@@ -102,6 +102,23 @@
             }
         })
 
+
+        app.get("/api/removelink/:cardId/:linkId", function (req, res) {
+            if (req.params.cardId && req.params.linkId) {
+                cardApi.removeLink(req.params.cardId, req.params.linkId, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send("Error");
+                    } else {
+                        res.send(data);
+                    }
+                })
+
+            } else {
+                res.status(500).send("Need link and card id");
+            }
+        })
+
         app.post("/api/links/:cardId", function (req, res) {
             if (req.params.cardId) {
                 cardApi.saveLink(req.params.cardId, req.body.link, function (err, data) {

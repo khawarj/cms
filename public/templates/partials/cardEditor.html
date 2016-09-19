@@ -7,6 +7,7 @@
 <ul>
     <li ng-repeat="link in card.links">
         <a ng-href="#/link/:{{card._id}}/:{{link._id}}">{{link.title}}</a>
+        <span ng-click="RemoveLink(link._id)">X</span>
     </li>
 </ul>
 
