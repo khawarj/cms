@@ -3,20 +3,23 @@
     var mongoose = require("mongoose");
     var Schema = mongoose.Schema;
 
-    var cardSchema = Schema({
+    var linkSchema = new Schema({
+        title: String,
+        href: String,
+        altText: String
+    })
+
+    var cardSchema = new Schema({
         name: String,
         title: String,
         subtitle: String,
         copy: String,
         layout: String,
-        links: [{
-            title: String,
-            href: String,
-            altText: String
-        }]
+        links: [linkSchema]
     });
 
     var Card = mongoose.model('Card', cardSchema);
+    var Link = mongoose.model('link', linkSchema);
 
     var card = {};
 
@@ -66,6 +69,55 @@
         })
     }
 
+    card.getLink = function (cardId, linkId, cb) {
+        if (linkId) {
+            Card.find({"links._id": linkId}, function (err, data) {
+                cb(err, data);
+            })
+        } else {
+            cb("Need Link Id to get Link", undefined)
+        }
+    }
+
+
+    card.saveLink = function (cardId, link, cb) {
+        if (cardId) {
+            Card.findById(cardId, function (err, card) {
+                if (err) {
+                    cb(err, card);
+                } else {
+                    if (link._id && link._id != 0) {
+                        card.links.findById(link._id, function (err, linkDb) {
+                            if (err) {
+                                cb(err, link);
+                            } else {
+                                linkDb.title = link.title;
+                                linkDb.href = link.href;
+                                linkDb.altText = link.altText;
+
+                                linkDb.save(function (err, data) {
+                                    cb(err, data);
+                                })
+                            }
+                        })
+                    } else {
+                        //new Link
+                        var linkObj = new Link({
+                            title: link.title,
+                            href: link.href,
+                            altText: link.altText
+                        });
+                        card.links.push(linkObj);
+                        card.save(function (err, card) {
+                            cb(err, card);
+                        })
+                    }
+                }
+            })
+        } else {
+            cb("Need Link Id to get Link", undefined)
+        }
+    }
 
     card.remove = function (id) {
 

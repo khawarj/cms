@@ -15,7 +15,7 @@
                 templateUrl: "/public/templates/partials/cardList.html",
                 controller: "cardListCtrl"
             })
-            .when("/link/:id", {
+            .when("/link/:cardId/:id?", {
                 templateUrl: "/public/templates/partials/linkEditor.html",
                 controller: "linkCtrl"
             })

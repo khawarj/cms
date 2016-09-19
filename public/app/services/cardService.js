@@ -18,6 +18,16 @@
             } else {
                 return $http.post("/api/cards", card);
             }
+        }
+
+        this.getLink = function (cardId, linkId) {
+            if (linkId) {
+                return $http.get("/api/links/" + cardId + "/" + linkId);
+            }
+        }
+
+        this.saveLink = function (cardId, link) {
+            return $http.post("/api/links/" + cardId, link);
 
         }
 

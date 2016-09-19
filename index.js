@@ -85,6 +85,39 @@
             }
         })
 
+
+        app.get("/api/links/:cardId/:linkId", function (req, res) {
+            if (req.params.linkId) {
+                cardApi.getLink(req.params.linkId, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send("Error");
+                    } else {
+                        res.send(data);
+                    }
+                })
+
+            } else {
+                res.status(500).send("Need link id");
+            }
+        })
+
+        app.post("/api/links/:cardId", function (req, res) {
+            if (req.params.cardId) {
+                cardApi.saveLink(req.params.cardId, req.body.link, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send("Error");
+                    } else {
+                        res.send(data);
+                    }
+                })
+            } else {
+                res.status(500).send("Need card id");
+            }
+        })
+
+
         app.listen(3500, function () {
             console.log("Listening at 3500");
         })

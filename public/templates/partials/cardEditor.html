@@ -6,8 +6,10 @@
 <span>Links</span>
 <ul>
     <li ng-repeat="link in card.links">
-        <a ng-href="#/link/:{{link._id}}">{{link.title}}</a>
+        <a ng-href="#/link/:{{card._id}}/:{{link._id}}">{{link.title}}</a>
     </li>
 </ul>
+
+<a ng-href="#/link/{{card._id}}">Create New Link</a>
 
 <input type="button" ng-click="CreateCard()" value="{{buttonText}}"/>
