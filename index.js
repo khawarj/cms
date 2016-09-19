@@ -29,14 +29,60 @@
             res.sendFile('cardCreate.html', {root: path.join(__dirname, '/public/templates')});
         })
 
-        app.post("/createCard", function (req, res) {
+        app.post("/api/cards", function (req, res) {
             cardApi.save(req.body, function (err, data) {
                 if (err) {
                     console.log(err);
+                    res.status(500).send("Error");
                 } else {
-                    res.send("success");
+                    res.send(data);
                 }
             })
+        })
+
+
+        app.get("/api/cards", function (req, res) {
+            cardApi.getCards(function (err, data) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Error");
+                } else {
+                    res.send(data);
+                }
+            })
+        })
+
+        app.get("/api/cards/:cardId", function (req, res) {
+
+            if (req.params.cardId) {
+                cardApi.getCard(req.params.cardId, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send("Error");
+                    } else {
+                        res.send(data);
+                    }
+                })
+
+            } else {
+                res.status(500).send("Need card id");
+            }
+        })
+
+
+        app.post("/api/cards/:cardId", function (req, res) {
+            if (req.params.cardId) {
+                cardApi.save(req.body, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send("Error");
+                    } else {
+                        res.send(data);
+                    }
+                })
+            } else {
+                res.status(500).send("Need card id");
+            }
         })
 
         app.listen(3500, function () {

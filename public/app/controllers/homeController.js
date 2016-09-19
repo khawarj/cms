@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("cms");
 
-    app.controller("homeCtrl", function () {
-        console.log("home");
-    })
+    app.controller("homeCtrl", ["$scope", function ($scope) {
+
+    }])
 }())

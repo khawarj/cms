@@ -7,8 +7,13 @@
                 templateUrl: "/public/templates/partials/home.html",
                 controller: "homeCtrl"
             })
+            .when("/cards/:id", {
+                templateUrl: "/public/templates/partials/cardEditor.html",
+                controller: "cardEditorCtrl"
+            })
             .when("/cards", {
-                template: "<h1>hello</h1>"
+                templateUrl: "/public/templates/partials/cardList.html",
+                controller: "cardListCtrl"
             })
             .otherwise('/home')
     }])
